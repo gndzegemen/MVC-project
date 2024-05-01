@@ -1,0 +1,36 @@
+﻿@model IEnumerable<RentACar_Model.Models.User>
+<br />
+<br />
+
+<div class=" border p-4 bg-white">
+    <div class="col-9">
+        <h2 class="text-info">Account List</h2>
+    </div>
+   
+    <br />
+    <div>
+        @if (Model.Count() > 0)
+        {
+            <table class="table table-striped border">
+                <tr class="table secondary">
+                    <th>Kullanıcı İsmi</th>
+                    <th>Kullanıcı Parolası</th>
+                    <th>Kullanıcı Rolü</th>
+                </tr>
+                @foreach (var user in Model)
+                {
+                    <tr>
+                        <td>@user.Username</td>
+                        <td>@user.Password</td>
+                        <td>@user.UserRole</td>
+                    </tr>
+                }
+            </table>
+        }
+        else
+        {
+            <p>No users found.</p>
+        }
+    </div>
+
+</div>

@@ -1,0 +1,65 @@
+﻿@model RentACar_Model.Models.Vehicle
+
+@{
+    var title = "Add Vehicle Info";
+}
+
+<form method="post" asp-controller="UserDashboard" asp-action="UpdateInsertVehicleInfo">
+    <div class="row p-3 border">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <input type="hidden" asp-for="VehicleId" />
+        @if (Model.VehicleId != 0)
+        {
+            title = "Update Vehicle Info";
+        }
+
+        <div class="col-12 border-bottom">
+            <h2 class="text-primary">@title</h2>
+        </div>
+        <div class="col-8 pt-4">
+            <div class="form-group row">
+                <label class="col-4" asp-for="Name">Araç Adı</label>
+                <div class="col-8">
+                    <input class="form-control" asp-for="Name" />
+                    <span class="text-danger" asp-validation-for="Name"></span>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-4" asp-for="LicensePlate">Plaka</label>
+                <div class="col-8">
+                    <input class="form-control" asp-for="LicensePlate" />
+                    <span class="text-danger" asp-validation-for="LicensePlate"></span>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-4" asp-for="ActiveWorkingTime">Aktif Çalışma Süresi (sa)</label>
+                <div class="col-8">
+                    <input class="form-control" asp-for="ActiveWorkingTime" />
+                    <span class="text-danger" asp-validation-for="ActiveWorkingTime"></span>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-4" asp-for="MaintenanceTime">Bakım Süresi (sa)</label>
+                <div class="col-8">
+                    <input class="form-control" asp-for="MaintenanceTime" />
+                    <span class="text-danger" asp-validation-for="MaintenanceTime"></span>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-4" asp-for="IdleStandbyTime">Boşta Bekleme Süresi (sa)</label>
+                <div class="col-8">
+                    <input class="form-control" asp-for="IdleStandbyTime" />
+                    <span class="text-danger" asp-validation-for="IdleStandbyTime"></span>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-12">
+            <button type="submit" class="btn btn-primary">Kaydet</button>
+        </div>
+    </div>
+</form>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

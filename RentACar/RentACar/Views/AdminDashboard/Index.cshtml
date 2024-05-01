@@ -1,0 +1,64 @@
+﻿@model IEnumerable<RentACar_Model.Models.Vehicle>
+
+@{
+    ViewData["Title"] = "Admin Dashboard";
+}
+
+<div class="container">
+    <div class="row">
+        <div class="col-12">
+            <h1 class="text-info">Admin Dashboard</h1>
+        </div>
+    </div>
+
+    <div class="row mt-4">
+        <div class="col-12">
+            <h2 class="text-info">Vehicle List</h2>
+        </div>
+        <div class="col-12">
+            @if (Model.Any())
+            {
+                <table class="table table-striped border">
+                    <thead class="thead-dark">
+                        <tr>
+                            <th scope="col">Araç Adı</th>
+                            <th scope="col">Plakası</th>
+                            <th scope="col">Aktif Çalışma Zamanı</th>
+                            <th scope="col">Bekleme Süresi</th>
+                            <th scope="col">Bakım Süresi</th>
+                            <th scope="col">Grafik</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var vehicle in Model)
+                        {
+                            <tr>
+                                <td>@vehicle.Name</td>
+                                <td>@vehicle.LicensePlate</td>
+                                <td>@(vehicle.ActiveWorkingTime > 0 ? "✔" : "❌")</td>
+                                <td>@(vehicle.IdleStandbyTime > 0 ? "✔" : "❌")</td>
+                                <td>@(vehicle.MaintenanceTime > 0 ? "✔" : "❌")</td>
+                                <td>
+                                    @if (vehicle.ActiveWorkingTime > 0 || vehicle.IdleStandbyTime > 0 || vehicle.MaintenanceTime > 0)
+                                    {
+                                        <a href="#" class="btn btn-primary">Grafik</a>
+                                    }
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            }
+            else
+            {
+                <p>No vehicles found.</p>
+            }
+        </div>
+    </div>
+
+    <div>
+        <p>
+            <a asp-action="AddNewVehicle" class="btn btn-primary">Add New Vehicle</a>
+        </p>
+    </div>
+</div>
