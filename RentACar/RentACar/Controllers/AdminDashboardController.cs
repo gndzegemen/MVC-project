@@ -37,5 +37,25 @@ namespace RentACar.Controllers
             return View(vehicle);
         }
 
+        [HttpGet]
+        public IActionResult VehicleChart(int id)
+        {
+            var vehicle = _db.vehicles.Find(id);
+            if (vehicle == null)
+            {
+                return NotFound();
+            }
+
+            var chartData = new Dictionary<string, int>
+            {
+                { "Active Working Time", Convert.ToInt32(vehicle.ActiveWorkingTime) },
+                { "Idle Standby Time", Convert.ToInt32(vehicle.IdleStandbyTime) },
+                { "Maintenance Time", Convert.ToInt32(vehicle.MaintenanceTime) }
+            };
+
+
+            return View(chartData);
+        }
+
     }
 }

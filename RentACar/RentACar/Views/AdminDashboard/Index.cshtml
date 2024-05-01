@@ -41,7 +41,9 @@
                                 <td>
                                     @if (vehicle.ActiveWorkingTime > 0 || vehicle.IdleStandbyTime > 0 || vehicle.MaintenanceTime > 0)
                                     {
-                                        <a href="#" class="btn btn-primary">Grafik</a>
+
+                                        <a asp-action="VehicleChart" asp-route-id="@vehicle.VehicleId">Grafik</a>
+                                   
                                     }
                                 </td>
                             </tr>
