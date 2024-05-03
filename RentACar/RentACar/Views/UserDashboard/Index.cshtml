@@ -16,7 +16,7 @@
                     <th>Aktif Çalışma Süresi (sa)</th>
                     <th>Bakım Süresi (sa)</th>
                     <th>Boşta Bekleme Süresi (sa)</th>
-                    <th>Değerleri Değiştir</th>
+                    <th></th>
                 </tr>
                 @foreach (var vehicle in Model)
                 {
@@ -28,7 +28,7 @@
                         <td>@vehicle.IdleStandbyTime</td>
 
                         <td>
-                            <a asp-action="UpdateInsertVehicleInfo" asp-route-id="@vehicle.VehicleId">Değerleri Değiştir</a>
+                            <a asp-action="AddVehicleInfo" asp-route-id="@vehicle.VehicleId" class="btn btn-primary">Add Info</a>
                         </td>
                     </tr>
                 }

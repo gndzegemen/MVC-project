@@ -22,26 +22,26 @@ namespace RentACar.Controllers
         }
 
         [HttpGet]
-        public IActionResult UpdateInsertVehicleInfo(int? id)
+        public IActionResult AddVehicleInfo(int? id)
         {
             if (id == null)
             {
                 return View(new Vehicle());
             }
 
-            Vehicle obj = _db.vehicles.FirstOrDefault(a => a.VehicleId == id);
+            var objDb = _db.vehicles.FirstOrDefault(a => a.VehicleId == id);
 
-            if (obj == null)
+            if (objDb == null)
             {
                 return NotFound();
             }
 
-            return View(obj);
+            return View(objDb);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult UpdateInsertVehicleInfo(Vehicle obj)
+        public IActionResult AddVehicleInfo(Vehicle obj)
         {
             if (ModelState.IsValid)
             {
@@ -54,11 +54,20 @@ namespace RentACar.Controllers
                     _db.vehicles.Update(obj);
                 }
 
+                obj.CalculateIdleStandbyTime();
+                obj.CalculateActiveWorkingTimePercentage();
+                obj.CalculateIdleStandbyTimePercentage();
+
                 _db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
             return View(obj);
         }
+
+
+       
+
+
     }
 }

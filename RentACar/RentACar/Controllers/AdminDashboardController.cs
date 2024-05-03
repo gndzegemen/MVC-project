@@ -37,22 +37,37 @@ namespace RentACar.Controllers
             return View(vehicle);
         }
 
-        [HttpGet]
-        public IActionResult VehicleChart(int id)
+        public IActionResult Delete(int id)
         {
-            var vehicle = _db.vehicles.Find(id);
-            if (vehicle == null)
+            var objDb = _db.vehicles.FirstOrDefault(a => a.VehicleId == id);
+            _db.vehicles.Remove(objDb);
+            _db.SaveChanges();
+            return RedirectToAction(nameof(Index));
+        }
+        [HttpGet]
+        public IActionResult ActiveWorkingTimeChart()
+        {
+            List<Vehicle> vehicles = _db.vehicles.ToList();
+            Dictionary<string, int> chartData = new Dictionary<string, int>();
+
+            foreach (var vehicle in vehicles)
             {
-                return NotFound();
+                chartData.Add(vehicle.Name, vehicle.ActiveWorkingTimePercentage);
             }
 
-            var chartData = new Dictionary<string, int>
-            {
-                { "Active Working Time", Convert.ToInt32(vehicle.ActiveWorkingTime) },
-                { "Idle Standby Time", Convert.ToInt32(vehicle.IdleStandbyTime) },
-                { "Maintenance Time", Convert.ToInt32(vehicle.MaintenanceTime) }
-            };
+            return View(chartData);
+        }
 
+        [HttpGet]
+        public IActionResult IdleStandbyTimeChart()
+        {
+            List<Vehicle> vehicles = _db.vehicles.ToList();
+            Dictionary<string, int> chartData = new Dictionary<string, int>();
+
+            foreach (var vehicle in vehicles)
+            {
+                chartData.Add(vehicle.Name, vehicle.IdleStandbyTimePercentage);
+            }
 
             return View(chartData);
         }

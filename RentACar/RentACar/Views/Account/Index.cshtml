@@ -16,6 +16,7 @@
                     <th>Kullanıcı İsmi</th>
                     <th>Kullanıcı Parolası</th>
                     <th>Kullanıcı Rolü</th>
+                    <th></th>
                 </tr>
                 @foreach (var user in Model)
                 {
@@ -23,6 +24,11 @@
                         <td>@user.Username</td>
                         <td>@user.Password</td>
                         <td>@user.UserRole</td>
+                        <td>
+                            <a class="btn btn-danger text-white" asp-action="Delete" asp-route-Id="@user.UserId">
+                                Delete
+                            </a>
+                        </td>
                     </tr>
                 }
             </table>

@@ -1,0 +1,27 @@
+﻿@model RentACar_Model.Models.User
+
+<h2>Register New Account</h2>
+
+<form asp-action="Register" method="post">
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+    <div class="form-group">
+        <label asp-for="Username">User Name</label>
+        <input asp-for="Username" class="form-control" />
+        <span asp-validation-for="Username" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Password">Password</label>
+        <input asp-for="Password" class="form-control" />
+        <span asp-validation-for="Password" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="UserRole">Role</label>
+        <input asp-for="UserRole" class="form-control" />
+        <span asp-validation-for="UserRole" class="text-danger"></span>
+    </div>
+    <br />
+    <div>
+        <button type="submit" class="btn btn-primary">Register</button>
+    </div>
+
+</form>

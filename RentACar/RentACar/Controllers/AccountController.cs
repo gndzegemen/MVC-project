@@ -18,5 +18,13 @@ namespace RentACar.Controllers
 
             return View(objList);
         }
+
+        public IActionResult Delete(int id)
+        {
+            var objDb = _db.users.FirstOrDefault(a => a.UserId == id);
+            _db.users.Remove(objDb);
+            _db.SaveChanges();
+            return RedirectToAction(nameof(Index));
+        }
     }
 }

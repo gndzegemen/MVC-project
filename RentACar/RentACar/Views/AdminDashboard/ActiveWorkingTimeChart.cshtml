@@ -1,0 +1,60 @@
+﻿@model Dictionary<string, int>
+
+@{
+    ViewData["Title"] = "Active Working Time Chart";
+}
+
+<div class="container">
+    <div class="row">
+        <div class="col-12">
+            <h1 class="text-primary">Active Working Time Chart</h1>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12">
+            <canvas id="activeWorkingChart"></canvas>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.0/chart.min.js"></script>
+    <script>
+        var chartData = @Html.Raw(Json.Serialize(Model));
+
+        var labels = Object.keys(chartData);
+        var percentages = Object.values(chartData);
+
+        var ctx = document.getElementById('activeWorkingChart').getContext('2d');
+        var myChart = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: labels,
+                datasets: [{
+                    label: 'Active Working Time Percentage',
+                    data: percentages,
+                    backgroundColor: 'rgba(54, 162, 235, 0.5)',
+                    borderColor: 'rgba(54, 162, 235, 1)',
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        title: {
+                            display: true,
+                            text: 'Percentage (%)'
+                        }
+                    },
+                    x: {
+                        title: {
+                            display: true,
+                            text: 'Vehicle Name'
+                        }
+                    }
+                }
+            }
+        });
+    </script>
+}

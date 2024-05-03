@@ -7,7 +7,7 @@
 <div class="container">
     <div class="row">
         <div class="col-12">
-            <h1 class="text-info">Admin Dashboard</h1>
+            <h1 class="text-primary">Admin Dashboard</h1>
         </div>
     </div>
 
@@ -24,9 +24,9 @@
                             <th scope="col">Araç Adı</th>
                             <th scope="col">Plakası</th>
                             <th scope="col">Aktif Çalışma Zamanı</th>
-                            <th scope="col">Bekleme Süresi</th>
                             <th scope="col">Bakım Süresi</th>
-                            <th scope="col">Grafik</th>
+                            <th scope="col">Bekleme Süresi</th>
+                            <th></th>
                         </tr>
                     </thead>
                     <tbody>
@@ -36,15 +36,12 @@
                                 <td>@vehicle.Name</td>
                                 <td>@vehicle.LicensePlate</td>
                                 <td>@(vehicle.ActiveWorkingTime > 0 ? "✔" : "❌")</td>
-                                <td>@(vehicle.IdleStandbyTime > 0 ? "✔" : "❌")</td>
                                 <td>@(vehicle.MaintenanceTime > 0 ? "✔" : "❌")</td>
+                                <td>@(vehicle.IdleStandbyTime > 0 ? "✔" : "❌")</td>
                                 <td>
-                                    @if (vehicle.ActiveWorkingTime > 0 || vehicle.IdleStandbyTime > 0 || vehicle.MaintenanceTime > 0)
-                                    {
-
-                                        <a asp-action="VehicleChart" asp-route-id="@vehicle.VehicleId">Grafik</a>
-                                   
-                                    }
+                                    <a class="btn btn-danger text-white" asp-action="Delete" asp-route-Id="@vehicle.VehicleId">
+                                        Delete
+                                    </a>
                                 </td>
                             </tr>
                         }
@@ -62,5 +59,13 @@
         <p>
             <a asp-action="AddNewVehicle" class="btn btn-primary">Add New Vehicle</a>
         </p>
+
+        <p>
+            <a asp-action="ActiveWorkingTimeChart" class="btn btn-secondary">Active Working Time Chart</a>
+        </p>
+        <p>
+            <a asp-action="IdleStandbyTimeChart" class="btn btn-secondary">Idle Standby Time Chart</a>
+        </p>
     </div>
 </div>
+
